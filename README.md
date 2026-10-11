@@ -2,42 +2,7 @@
 
 ## Setup
 
-1. **Banco de dados** — precisa de um MySQL/MariaDB rodando. Importe o schema
-   com o charset certo (senão os acentos corrompem, ver comentário no topo
-   do arquivo):
-
-   ```bash
-   mysql -u root --default-character-set=utf8mb4 < db/schema.sql
-   ```
-
-   Isso cria o banco `if_fitness`, as tabelas, o catálogo de 122 exercícios
-   E o usuário de aplicação `if_fitness_app` (com uma senha de exemplo —
-   troque antes de usar fora da sua máquina, é a última seção do arquivo).
-
-2. **Variáveis de ambiente**:
-
-   ```bash
-   cp .env.example .env
-   ```
-
-   Ajuste `DB_PASSWORD` pra bater com a senha que você usou (ou deixou) no
-   `CREATE USER` do schema.sql, e troque `SESSION_SECRET` por algo aleatório.
-
-3. **Dependências e execução**:
-
-   ```bash
-   npm install
-   npm start
-   ```
-
-   Servidor sobe em `http://localhost:3000` — front-end e API na mesma
-   origem (ver comentário em `server.js` sobre por quê).
-
-4. **Testar tudo de uma vez**: `bash test_api.sh` — recria o banco do zero e
-   roda toda a API via curl (cadastro, login, rotinas, treino completo,
-   histórico, checagem de autorização entre usuários). Mesmo padrão de
-   script auto-contido que já existia pro `test_api.sh` de outra etapa do
-   projeto.
+1. Link hospedado pelo render: https://projeto-programacao-internet.onrender.com/inicio.html
 
 ## O que foi implementado nesta rodada
 

@@ -35,11 +35,8 @@ app.use(session({
     saveUninitialized: false,
     cookie: {
         maxAge: 1000 * 60 * 60 * 8, // 8 horas
-        httpOnly: true
-        // 'secure: true' fica de fora de propósito: em desenvolvimento local
-        // (http, não https) o cookie seria descartado pelo navegador se essa
-        // flag estivesse ligada. Antes de ir pra produção com HTTPS, isso
-        // precisa ser reativado — ver README.
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production' // Ativa automaticamente se estiver no Render}
     }
 }));
 
@@ -47,6 +44,10 @@ app.use('/api/auth', authRoutes);
 app.use('/api/rotinas', rotinasRoutes);
 app.use('/api/exercicios', exerciciosRoutes);
 app.use('/api/treinos', treinosRoutes);
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/public/inicio.html');
+});
 
 app.use(express.static('public'));
 

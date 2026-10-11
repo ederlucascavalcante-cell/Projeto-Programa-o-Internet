@@ -30,11 +30,9 @@
 --     duplicar o dado guardando de novo em outro lugar — DRY).
 -- ============================================================================
 
-CREATE DATABASE IF NOT EXISTS if_fitness
-    CHARACTER SET utf8mb4
-    COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS railway; 
 
-USE if_fitness;
+USE railway;
 
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -575,22 +573,3 @@ INSERT INTO exercicio_grupos_secundarios (exercicio_id, grupo_id, ordem) VALUES
 ALTER TABLE exercicios AUTO_INCREMENT = 123;
 
 SET FOREIGN_KEY_CHECKS = 1;
-
-
--- ============================================================================
--- 8. USUÁRIO DE APLICAÇÃO (não confundir com a tabela `usuarios` do app)
--- ============================================================================
--- O backend Node NUNCA deve conectar como root. Em instalação padrão do
--- MySQL/MariaDB no Linux, o root usa autenticação por socket do sistema
--- operacional — funciona no `mysql -u root` da linha de comando, mas quebra
--- na conexão TCP que o driver do Node usa (erro
--- ER_ACCESS_DENIED_NO_PASSWORD_ERROR). Isso não é um obstáculo a contornar:
--- é o motivo pelo qual toda aplicação real usa um usuário de banco dedicado,
--- com só os privilégios que ela precisa (nada de CREATE/DROP/ALTER — a
--- aplicação lê e escreve linhas, não migra schema em tempo de execução).
---
--- TROQUE a senha abaixo antes de rodar isso fora da sua máquina de
--- desenvolvimento. Ela precisa bater com DB_PASSWORD no .env do backend.
-CREATE USER IF NOT EXISTS 'if_fitness_app'@'localhost' IDENTIFIED BY 'ifFitness_dev_2026';
-GRANT SELECT, INSERT, UPDATE, DELETE ON if_fitness.* TO 'if_fitness_app'@'localhost';
-FLUSH PRIVILEGES;
