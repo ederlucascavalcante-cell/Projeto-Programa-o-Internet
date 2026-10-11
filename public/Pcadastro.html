@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Projeto Programação Para Internet</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="logoIF.png" type="image/jpg">
+</head>
+
+<body>
+    <main id="conteudo-formularios">
+
+        <div class="titulo">CADASTRO DE USUÁRIO</div>
+
+        <form id="forms">
+            <fieldset>
+                <div class="campo">
+                    <label for="nome"> Nome: </label>
+                    <input type="text" name="nome" id="nome" placeholder="Como gostaria de ser chamado">
+                    <span id="nome-erro" class="erro"></span>
+                </div>
+                <div class="campo">
+                    <label for="email"> Email: </label>
+                    <input type="text" id="email" placeholder="usuario@email.com">
+                    <span id="email-erro" class="erro"></span>
+                </div>
+                <div class="campo">
+                    <label for="senha"> Senha: </label>
+                    <input type="password" id="senha" placeholder="8+ caracteres, com letras e números">
+                    <span id="senha-erro" class="erro"></span>
+                </div>
+
+                <p><br></p>
+
+                <button type="button" onclick="window.location.href='inicio.html'"> Voltar </button>
+
+                <button type="submit" style="float: right;"> Fazer Cadastro </button>
+
+                <button type="button" onclick="window.location.href='login.html'" style="float: right; margin-right: 10px"> Login </button>
+
+            </fieldset>
+        </form>
+    </main>
+    <script src="cadastro.js"></script>
+</body>
+</html>

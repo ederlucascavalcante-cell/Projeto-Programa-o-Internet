@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | IF Fitness</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="logoIF.png" type="image/jpg">
+</head>
+
+<body>
+    <header id="cabecalho">
+        <img src="IF Logo.png" class="logo-cabecalho" alt="Logo IF">
+        <nav class="nav-cabecalho">
+            <a href="usuario.html">Início</a>
+            <a href="meu-treino.html">Meu Treino</a>
+            <a href="#">Meu Perfil </a>
+            <a href="#" id="link-sair">Sair</a>
+        </nav>
+    </header>
+
+    <main id="conteudo-principal">
+        <div class="dash-container">
+
+            <!-- FEED PRINCIPAL (ROLA COM A TELA) -->
+            <section class="feed-principal">
+
+                <!-- Hero / Boas-Vindas -->
+                <div class="card-hero">
+                    <div class="hero-texto">
+                        <h1>Bem-vindo de volta, <span class="destaque-nome" id="nome-usuario">...</span>!</h1>
+                        <p>Mantenha o ritmo para alcançar seus objetivos.</p>
+                    </div>
+                </div>
+
+                <!-- Destaque: iniciar treino em branco. Não existe (ainda) uma
+                     lógica de "sugestão do dia" baseada em dados reais (última
+                     rotina usada, dia da semana etc.) — isso aqui só leva pra um
+                     treino livre, sem rotina associada. -->
+                <div class="card-proximo-treino">
+                    <div class="proximo-header">
+                        <span>TREINO LIVRE</span>
+                    </div>
+                    <h2>Começar um treino agora</h2>
+                    <p class="detalhes-treino">Sem rotina associada — adicione exercícios livremente durante o treino.</p>
+                    <div class="proximo-acoes">
+                        <button class="btn-iniciar-treino" id="btn-treino-livre">Iniciar Treino Agora</button>
+                    </div>
+                </div>
+
+                <!-- Lista de Rotinas Cadastradas -->
+                <div class="secao-rotinas">
+                    <div class="secao-header">
+                        <div>
+                            <h2>Minhas Rotinas</h2>
+                            <p class="subtitulo-secao">Gerencie e edite seus treinos salvos</p>
+                        </div>
+                        <button class="btn-novo" id="btn-nova-rotina">+ Nova Rotina</button>
+                    </div>
+
+                    <div id="lista-rotinas">
+                        <p class="rotinas-carregando">Carregando rotinas...</p>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- LATERAL FIXA (PAINEL DE STATS E ATALHOS) -->
+            <aside class="sidebar-fixa">
+
+                <!-- Os três widgets abaixo continuam com dado fixo de mockup.
+                     Não fazem parte do que foi pedido nesta rodada (autenticação,
+                     rotinas, treino ativo, histórico, exercício personalizado) —
+                     calcular consistência semanal e progresso de meta a partir do
+                     histórico real é trabalho novo, não uma reconexão simples. -->
+                <div class="widget-card">
+                    <div class="widget-title">
+                        <h3>Consistência Semanal</h3>
+                        <span class="valor-frequencia">4/5 Dias</span>
+                    </div>
+                    <div class="dias-semana-grid">
+                        <div class="dia-item concluido"><span>D</span><small>✓</small></div>
+                        <div class="dia-item concluido"><span>S</span><small>✓</small></div>
+                        <div class="dia-item concluido"><span>T</span><small>✓</small></div>
+                        <div class="dia-item concluido"><span>Q</span><small>✓</small></div>
+                        <div class="dia-item hoje"><span>Q</span><small>•</small></div>
+                        <div class="dia-item"><span>S</span><small>-</small></div>
+                        <div class="dia-item"><span>S</span><small>-</small></div>
+                    </div>
+                </div>
+
+                <div class="widget-card">
+                    <div class="widget-title">
+                        <h3>Meta de Carga Semanal</h3>
+                    </div>
+                    <div class="progress-info">
+                        <span>Volume Levantado</span>
+                        <strong>14.250 kg</strong>
+                    </div>
+                    <div class="barra-progresso-bg">
+                        <div class="barra-progresso-fill" style="width: 75%;"></div>
+                    </div>
+                    <span class="meta-subtext">75% da sua meta alcançada (18.000 kg)</span>
+                </div>
+
+                <div class="widget-card">
+                    <h3>Ações Rápidas</h3>
+                    <div class="atalhos-lista">
+                        <button class="btn-atalho" id="btn-ver-historico">Ver Histórico Completo</button>
+                        <button class="btn-atalho" title="Ainda não implementado">Registrar Peso Atual</button>
+                    </div>
+                </div>
+
+            </aside>
+
+        </div>
+    </main>
+
+    <footer id="rodape">
+        <p>Para quaisquer dúvidas, relatos de experiências ou sugestões, contate o email: eder.oliveira@escolar.ifrn.edu</p>
+    </footer>
+
+    <script src="usuario.js"></script>
+</body>
+
+</html>

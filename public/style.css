@@ -1,0 +1,591 @@
+/* Reset e Configurações Gerais */
+* { margin: 0;  padding: 0;  box-sizing: border-box;  font-family: "Times New Roman", Times, serif; }
+
+body {
+    background-color: #080F19;
+    display: grid;
+    /* Agora temos apenas uma coluna que ocupa 100% da largura (1fr) */
+    grid-template-columns: 1fr;
+    /* As linhas se ajustam ao conteúdo, exceto o main que cresce (1fr) */
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas: 
+        "header"
+        "nav"
+        "main"
+        "footer";
+    min-height: 100vh;
+}
+
+body.sidebar {
+    grid-template-columns: 220px 1fr;   grid-template-rows: auto auto 1fr auto;   
+    grid-template-areas: 
+        "header  header"
+        "nav     nav"
+        "sidebar main"
+        "footer  footer";
+}
+
+#background-principal {
+    display:flex; align-items: center;  padding-left: 6%;  background-image: url(imagem-de-fundo.png);
+    min-height: 100vh; background-position: center right; 
+    background-size: cover;  background-repeat: no-repeat;
+}
+
+#conteudo-formularios {
+    grid-area: main; padding: 30px; margin: 0 auto; max-width: 500px;
+    width: 100%; align-items: center; justify-content: center; min-height: 100vh;
+}
+
+#conteudo-principal { grid-area: main; padding: 30px; max-width: 1000px; margin: 0 auto; width: 100%; }
+
+#conteudo-principal-cartoes {
+    grid-area: main; display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 35px 50px; padding: 35px; max-width: 900px; margin: -10px auto; width: 100%;
+}
+
+#cabecalho { 
+    grid-area: header; background-color: #050A10; border-bottom: 1px solid #182A3A;
+    color: white; padding: 10px 30px; display: flex; align-items: center; justify-content: space-between;
+}
+
+#rodape { grid-area: footer; background: #2c3e50; color: white; text-align: center; padding: 15px; }
+
+.logo-cabecalho { max-width: 125px; display: block; margin-left: 15px; }
+
+.nav-cabecalho { display: flex; gap: 24px; align-items: center; margin-right: 10px; }
+
+.nav-cabecalho a {
+    color: white; text-decoration: none; font-weight: bold; 
+    transition: background-color 0.3s ease, color 0.3s ease; 
+}
+
+.nav-cabecalho a:hover { color: #25C696; }
+
+.titulo {
+    border-radius: 6px; padding: 14px 10px; margin-bottom: 16px; background-color: #050A10;
+    color: #ffffff; border-bottom: 1px solid #25C696; text-align: center;
+}
+
+.toggle-group { display: flex; gap: 10px; margin-top: 15px; }
+
+/* Esconde as bolinhas do radio nativo */
+.toggle-group input[type="radio"] { display: none; }
+
+.toggle-btn {
+    flex: 1; padding: 10px; background-color: #121212; border: 1px solid #1e88e5;
+    border-radius: 8px; color: #ffffff; text-align: center; cursor: pointer; 
+    font-weight: bold; transition: background-color 0.5s ease, color 0.5s ease;
+}
+.toggle-btn:hover {
+    background-color: #1e88e5;
+}
+
+/* Visual do botão selecionado */
+.toggle-group input[type="radio"]:checked + .toggle-btn {
+    background-color: #1e88e5;
+}
+
+.cartao {
+    text-align: center; background: white; padding: 18px; border-radius: 8px;
+    margin-bottom: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden;
+}
+
+.cartaoT {
+    background: white; padding: 18px; border-radius: 8px; margin-bottom: 20px; 
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);  
+    display: flex; align-items: center; justify-content: space-between;
+}
+
+.cartao-centro { display: flex; flex-direction: column; align-items: center; flex: 1; }
+
+.cartao-botoes { display: flex; flex-direction: column; gap: 6px; }
+
+.erro { color: red; font-size: 12px; margin-bottom: 40px; }
+
+h2 { margin-bottom: 20px; color: #2c3e50; padding-left: 10px; }
+h3 { color: #2c3e50; margin-bottom: 10px;}
+
+fieldset { border: 1px solid #ddd; padding: 20px; border-radius: 8px; width: 100%; margin-bottom: 16px;}
+.campo { margin-bottom: 15px; } .campo label {color:#5BD940} .musculos-grid label {color:#5BD940}
+label { display: block; margin-bottom: 5px; font-weight: bold; }
+
+input, textarea { 
+    width: 100%; padding: 10px; resize: none; margin-top: 6px; margin-left: 6px; 
+    border: 1px solid #1e88e5; border-radius: 4px; background-color: #121212; color: #ffffff;}
+
+button {
+    background: #1abc9c; color: white; border: none; padding: 10px 20px;
+    border-radius: 4px; cursor: pointer; font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.button-maior { margin-right: 8px; font-size: 20px; padding: 15px 30px; border-radius: 12px }
+
+button:hover { background: #16a084e5; }
+
+.botao-editar {background: #1a89bc}
+
+.botao-editar:hover{background: #1a66bc}
+
+.botao-excluir {background:#e74c3c}
+
+.botao-excluir:hover {background:#c94234}
+
+.custom-select { position: relative; width: 100%; margin-top: 8px; }
+
+/* Botão principal */
+.select-btn {
+  width: 100%; padding: 10px 16px; background-color: #121212; color: #ffffff;
+  border: 1px solid #1e88e5; /* Borda azul em destaque */ border-radius: 8px;
+  display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-size: 14px;
+  transition: background-color 0.8s ease, color 1.5s ease;
+}
+
+/* Lista suspensa (Dropdown) */
+.select-options {
+  position: absolute; top: 100%; left: 0; width: 100%; max-height: 220px;
+  margin-top: 6px; padding: 0; list-style: none; background-color: #1c1c1c; border-radius: 8px; 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); overflow-y: auto; display: none; z-index: 10;
+}
+
+/* Quando aberto */
+.select-options.show { display: block; }
+
+/* Opções individuais */
+.option { padding: 12px 16px; color: #e0e0e0; cursor: pointer; font-size: 14px; transition: background 0.2s; }
+
+.option:hover { background-color: #2a2a2a; }
+
+/* Item selecionado (com o "check" azul) */
+.option.active { color: #ffffff; display: flex; justify-content: space-between; }
+
+.option.active::after { content: '✓'; color: #1e88e5; font-weight: bold; }
+
+.dash-layout { display: grid; grid-template-columns: 1fr 300px; gap: 30px; align-items: start; }
+
+/* Coluna principal (Esquerda) */
+.coluna-principal { display: flex; flex-direction: column; gap: 25px; }
+
+.boas-vindas { 
+    background-color: #050A10; padding: 24px; 
+    border-radius: 8px; border: 1px solid #182A3A; color: #ffffff; 
+}
+
+.cabecalho-treinos { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+
+.cabecalho-treinos h2 { color: #ffffff; padding-left: 0; }
+
+/* Coluna Lateral Fixo (Direita) */
+.coluna-lateral { position: sticky; top: 20px; display: flex; flex-direction: column; gap: 20px; }
+
+.widget-fixo { background-color: #050A10; border: 1px solid #182A3A; border-radius: 8px; padding: 20px; }
+
+/* ==========================================================================
+   LAYOUT AVANÇADO TIPO HEAVY APP
+   ========================================================================== */
+
+.dash-container { display: grid; grid-template-columns: 1fr 320px; gap: 30px; align-items: start; }
+
+.feed-principal {
+    display: flex; flex-direction: column; gap: 24px;
+}
+
+/* Card Hero / Apresentação */
+.card-hero {
+    background: linear-gradient(135deg, #050A10 0%, #0d1b2a 100%); border: 1px solid #182A3A;
+    border-left: 4px solid #25C696; padding: 28px; border-radius: 12px;
+}
+
+.badge-status {
+    display: inline-block; background-color: rgba(37, 198, 150, 0.15); color: #25C696; 
+    font-size: 12px; font-weight: bold; padding: 4px 10px; border-radius: 20px; margin-bottom: 12px;
+}
+
+.card-hero h1 { color: #ffffff; font-size: 26px; margin-bottom: 8px; }
+
+.destaque-nome { color: #25C696; }
+
+.card-hero p { color: #a0aec0; font-size: 14px; }
+
+.card-personal-central {
+    background-color: #050A10; border: 1px solid #182A3A;
+    border-radius: 12px; padding: 20px 24px; margin-bottom: 8px; }
+
+/* Cenário SEM Personal */
+.personal-status-sem { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+
+.badge-alerta {
+    display: inline-block; background-color: rgba(230, 126, 34, 0.15); color: #e67e22;
+    font-size: 11px; font-weight: bold; padding: 3px 8px; border-radius: 4px; margin-bottom: 6px;
+}
+
+.personal-info-texto h3 { color: #ffffff; font-size: 16px; margin-bottom: 4px; }
+.personal-info-texto p { color: #a0aec0; font-size: 13px; }
+
+.btn-afiliar { background-color: #1e88e5; white-space: nowrap; }
+.btn-afiliar:hover { background-color: #1a66bc; }
+
+/* Cenário COM Personal */
+.personal-status-com { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+
+.personal-perfil { display: flex; align-items: center; gap: 16px; }
+
+.personal-avatar {
+    font-size: 32px; background-color: #121212; border: 1px solid #182A3A;
+    border-radius: 50%; width: 54px; height: 54px; display: flex; align-items: center; justify-content: center; }
+
+.badge-conectado { display: inline-block; color: #5BD940; font-size: 11px; font-weight: bold; margin-bottom: 4px; }
+
+.personal-status-com h3 { color: #ffffff; font-size: 16px; margin-bottom: 2px; }
+
+.personal-meta { color: #718096; font-size: 12px; }
+
+.btn-mudar-personal { background-color: #121212; border: 1px solid #182A3A; color: #a0aec0; white-space: nowrap; }
+.btn-mudar-personal:hover { background-color: #182A3A; color: #ffffff; }
+
+/* Próximo Treino Destaque */
+.card-proximo-treino {
+     background-color: #050A10; border: 1px solid #1e88e5; 
+     border-radius: 12px; padding: 20px 24px;
+}
+
+.proximo-header {
+    display: flex; justify-content: space-between; font-size: 12px;
+    font-weight: bold; color: #1e88e5; margin-bottom: 8px;
+}
+
+.card-proximo-treino h2 { color: #ffffff; padding-left: 0; margin-bottom: 6px; }
+
+.detalhes-treino { color: #a0aec0; font-size: 13px; margin-bottom: 16px; }
+
+.btn-iniciar-treino { width: 100%; font-size: 16px; padding: 12px; background: #25C696; color: #050A10; }
+.btn-iniciar-treino:hover { background: #1eb083; }
+
+/* Seção Minhas Rotinas */
+.secao-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+
+.secao-header h2 { color: #ffffff; padding-left: 0; margin-bottom: 2px; }
+
+.subtitulo-secao { color: #718096; font-size: 13px; }
+
+.btn-novo { background-color: #1e88e5; }
+.btn-novo:hover { background-color: #1a66bc; }
+
+/* Card de Rotina Indivídual */
+.card-rotina {
+    background-color: #050A10; border: 1px solid #182A3A; border-radius: 10px;
+    padding: 18px; margin-bottom: 12px; display: flex; flex-direction: column; gap: 12px;
+}
+
+.rotina-info { display: flex; gap: 14px; align-items: center; }
+
+.rotina-icone {
+    font-size: 28px; background: #121212;
+     padding: 10px; border-radius: 8px; border: 1px solid #182A3A;
+}
+
+.rotina-info h3 { color: #ffffff; margin-bottom: 6px; font-size: 16px; }
+
+.tags-musculos { display: flex; gap: 6px; }
+
+.tag-musculo {
+    background: #121212; color: #5BD940; border: 1px solid #182A3A;
+    font-size: 11px; padding: 2px 8px; border-radius: 4px;
+}
+
+.rotina-meta {
+    display: flex; gap: 20px; color: #a0aec0;
+    font-size: 12px; border-top: 1px solid #121212; padding-top: 10px;
+}
+
+.cartao-botoes-row { display: flex; gap: 10px; justify-content: flex-end; }
+
+/* ==========================================================================
+   SIDEBAR FIXA E WIDGETS
+   ========================================================================== */
+
+.sidebar-fixa { position: sticky; top: 20px; display: flex; flex-direction: column; gap: 18px; }
+
+.widget-card { background-color: #050A10; border: 1px solid #182A3A; border-radius: 12px; padding: 18px; }
+
+.widget-card h3 { color: #ffffff; font-size: 15px; margin-bottom: 12px; }
+
+.widget-title { display: flex; justify-content: space-between; align-items: center;}
+
+.valor-frequencia { color: #25C696; font-weight: bold; font-size: 13px;}
+
+/* Grid Dias da Semana */
+.dias-semana-grid {
+    display: grid; grid-template-columns: repeat(7, 1fr); 
+    gap: 6px; text-align: center; margin-top: 10px;
+}
+
+.dia-item {
+    background-color: #121212; border: 1px solid #182A3A; border-radius: 6px; padding: 8px 0; 
+    color: #718096; font-size: 11px; display: flex; flex-direction: column; gap: 4px;
+}
+
+.dia-item.concluido { background-color: rgba(37, 198, 150, 0.1); border-color: #25C696; color: #25C696; }
+
+.dia-item.hoje { border-color: #1e88e5; color: #1e88e5; }
+
+/* Barra de Progresso */
+.progress-info { display: flex; justify-content: space-between; color: #a0aec0; font-size: 13px; margin-bottom: 8px; }
+
+.barra-progresso-bg { 
+    background: #121212; height: 10px; border-radius: 10px; 
+    overflow: hidden; border: 1px solid #182A3A;
+}
+
+.barra-progresso-fill { background: linear-gradient(90deg, #1e88e5, #25C696); height: 100%; border-radius: 10px; }
+
+.meta-subtext { display: block; color: #718096; font-size: 11px; margin-top: 6px; }
+
+.atalhos-lista { display: flex; flex-direction: column; gap: 8px; }
+
+.btn-atalho {
+    background-color: #121212; border: 1px solid #182A3A;
+    color: #ffffff; text-align: left; padding: 10px 14px;
+}
+.btn-atalho:hover { background-color: #182A3A; }
+
+
+
+/* ==========================================================================
+   TELA DE TREINO ATIVO (treino-ativo.html)
+   ========================================================================== */
+ 
+/* Layout de duas colunas: treino à esquerda, biblioteca de exercícios à direita.
+   Mesma lógica do .dash-container de usuario.html — a coluna da esquerda
+   encolhe pra abrir espaço pra sidebar, mas a borda esquerda do conteúdo
+   não se move, porque #conteudo-principal continua com o mesmo max-width. */
+.treino-layout { display: grid; grid-template-columns: 1fr 320px; gap: 30px; align-items: start; }
+.treino-coluna-principal { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+.treino-sidebar { position: sticky; top: 20px; display: flex; flex-direction: column; gap: 18px; }
+ 
+.treino-ativo-header {
+    display: flex; justify-content: space-between; align-items: center; gap: 20px;
+    background: linear-gradient(135deg, #050A10 0%, #0d1b2a 100%);
+    border: 1px solid #182A3A; border-left: 4px solid #25C696;
+    padding: 24px 28px; border-radius: 12px; flex-wrap: wrap;
+}
+.treino-ativo-header h1 { color: #ffffff; font-size: 24px; margin-top: 8px; }
+ 
+.cronometro-box {
+    display: flex; flex-direction: column; align-items: flex-end;
+    background-color: #121212; border: 1px solid #182A3A; border-radius: 10px; padding: 10px 20px;
+}
+.cronometro-label { color: #718096; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+.cronometro-tempo { color: #25C696; font-size: 26px; font-weight: bold; font-variant-numeric: tabular-nums; }
+ 
+.treino-stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.stat-card {
+    background-color: #050A10; border: 1px solid #182A3A; border-radius: 10px;
+    padding: 16px 18px; display: flex; flex-direction: column; gap: 6px;
+}
+.stat-label { color: #718096; font-size: 12px; }
+.stat-valor { color: #ffffff; font-size: 20px; }
+ 
+.lista-exercicios-treino { display: flex; flex-direction: column; gap: 18px; }
+.exercicio-treino-card { background-color: #050A10; border: 1px solid #182A3A; border-radius: 10px; padding: 18px 20px; }
+.exercicio-treino-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.exercicio-treino-header h3 { color: #ffffff; margin-bottom: 0; }
+ 
+.badges-exercicio { display: flex; flex-wrap: wrap; gap: 6px; }
+ 
+/* .tag-musculo (cor/borda base) já existe na seção de Minhas Rotinas.
+   .tag-primario só reforça a primeira badge (o agrupamento principal). */
+.tag-primario {
+    background-color: rgba(37, 198, 150, 0.15);
+    border-color: #25C696;
+    color: #25C696;
+}
+ 
+.tabela-series { width: 100%; border-collapse: collapse; margin-bottom: 12px; }
+.tabela-series th {
+    color: #718096; font-size: 11px; text-transform: uppercase; text-align: left;
+    padding: 6px 8px; border-bottom: 1px solid #182A3A;
+}
+.tabela-series td { padding: 6px 8px; border-bottom: 1px solid #121212; }
+.tabela-series td:first-child { color: #a0aec0; font-size: 13px; width: 40px; }
+.tabela-series td:last-child { width: 36px; text-align: center; }
+.tabela-series .input-peso,
+.tabela-series .input-reps {
+    width: 70px; padding: 6px 8px; margin-top: 0;
+    background-color: #121212; border: 1px solid #182A3A; border-radius: 4px;
+    color: #ffffff; font-size: 13px;
+}
+.tabela-series .check-serie { width: 18px; height: 18px; accent-color: #25C696; cursor: pointer; }
+ 
+.btn-remover-serie,
+.btn-remover-exercicio {
+    background: transparent; border: 1px solid #182A3A; color: #e74c3c;
+    width: 28px; height: 28px; padding: 0; border-radius: 6px; font-size: 14px; line-height: 1;
+}
+.btn-remover-serie:hover,
+.btn-remover-exercicio:hover { background-color: rgba(231, 76, 60, 0.15); border-color: #e74c3c; }
+ 
+.btn-add-serie { background-color: #121212; border: 1px solid #182A3A; color: #a0aec0; font-size: 13px; padding: 8px 14px; }
+.btn-add-serie:hover { background-color: #182A3A; color: #ffffff; }
+ 
+.treino-ativo-acoes { display: flex; gap: 14px; flex-wrap: wrap; }
+.treino-ativo-acoes .btn-iniciar-treino { width: auto; }
+.btn-adicionar-exercicio { background-color: #1e88e5; padding: 12px 22px; }
+.btn-adicionar-exercicio:hover { background-color: #1a66bc; }
+.btn-fechar-treino { background-color: #e74c3c; padding: 12px 22px; }
+.btn-fechar-treino:hover { background-color: #c94234; }
+ 
+/* ---------- Widget padrão "Adicionar Exercício" ---------- */
+.sidebar-adicionar-desc { color: #718096; font-size: 13px; margin-bottom: 14px; }
+#widget-adicionar-exercicio .btn-adicionar-exercicio { width: 100%; }
+ 
+/* ---------- Painel da Biblioteca ---------- */
+.biblioteca-painel { display: flex; flex-direction: column; gap: 12px; }
+ 
+.biblioteca-painel { display: flex; flex-direction: column; gap: 12px; }
+.biblioteca-painel[hidden] { display: none !important; }
+.biblioteca-header { display: flex; justify-content: space-between; align-items: center; }
+.biblioteca-header h3 { margin-bottom: 0; }
+ 
+.btn-fechar-biblioteca {
+    background: transparent; border: 1px solid #182A3A; color: #a0aec0;
+    width: 28px; height: 28px; padding: 0; border-radius: 6px; font-size: 13px; line-height: 1;
+}
+.btn-fechar-biblioteca:hover { background-color: #182A3A; color: #ffffff; }
+ 
+.btn-exercicio-personalizado {
+    background: transparent; border: none; color: #1e88e5;
+    padding: 0; text-align: left; font-size: 13px; font-weight: bold;
+}
+.btn-exercicio-personalizado:hover { background: transparent; color: #5aa9f0; }
+ 
+.biblioteca-busca {
+    display: flex; align-items: center; gap: 8px;
+    background-color: #121212; border: 1px solid #182A3A; border-radius: 8px;
+    padding: 0 10px;
+}
+.biblioteca-busca-icone { font-size: 13px; color: #718096; }
+.biblioteca-busca input {
+    border: none; background: transparent; margin-top: 0; padding: 10px 0;
+    color: #ffffff; font-size: 13px;
+}
+.biblioteca-busca input:focus { outline: none; }
+.btn-limpar-busca {
+    background: transparent; border: none; color: #718096;
+    padding: 0; width: 20px; height: 20px; font-size: 12px; line-height: 1;
+}
+.btn-limpar-busca:hover { background: transparent; color: #ffffff; }
+ 
+.biblioteca-lista {
+    display: flex; flex-direction: column; gap: 6px;
+    max-height: 420px; overflow-y: auto; margin-top: 4px;
+}
+ 
+.biblioteca-item {
+    display: flex; align-items: center; gap: 12px; text-align: left;
+    background-color: #121212; border: 1px solid transparent; border-radius: 8px;
+    padding: 10px 12px; width: 100%; font-weight: normal;
+}
+.biblioteca-item:hover { background-color: #182A3A; border-color: #25C696; }
+.biblioteca-item:disabled { opacity: 0.6; cursor: default; }
+ 
+.biblioteca-item-icone {
+    flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%;
+    background-color: #050A10; border: 1px solid #182A3A;
+    display: flex; align-items: center; justify-content: center; font-size: 15px;
+}
+ 
+.biblioteca-item-info { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.biblioteca-item-nome { color: #ffffff; font-size: 13px; }
+ 
+.biblioteca-vazio { color: #718096; font-size: 13px; text-align: center; padding: 20px 0; }
+ 
+/* ---------- Modal: Exercício Personalizado ---------- */
+.modal-overlay {
+    position: fixed; inset: 0; background-color: rgba(5, 10, 16, 0.75);
+    display: none; align-items: center; justify-content: center; padding: 20px; z-index: 100;
+}
+
+/* Regra para respeitar o atributo 'hidden' nativo do HTML */
+.modal-overlay[hidden] { display: none !important; }
+
+/* Exibe o modal centralizado quando visível */
+.modal-overlay:not([hidden]) { display: flex !important; }
+ 
+.modal-personalizado {
+    background-color: #0d1b2a; border: 1px solid #182A3A; border-radius: 12px;
+    padding: 24px 28px; width: 100%; max-width: 480px;
+    max-height: 90vh; overflow-y: auto;
+}
+ 
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+.modal-header h3 { color: #ffffff; margin-bottom: 0; }
+ 
+.btn-fechar-modal {
+    background: transparent; border: 1px solid #182A3A; color: #a0aec0;
+    width: 28px; height: 28px; padding: 0; border-radius: 6px; font-size: 13px; line-height: 1;
+}
+.btn-fechar-modal:hover { background-color: #182A3A; color: #ffffff; }
+ 
+.btn-salvar-personalizado { width: 100%; margin-top: 6px; }
+ 
+@media (max-width: 900px) {
+    .treino-layout { grid-template-columns: 1fr; }
+    .treino-sidebar { position: static; }
+}
+ 
+@media (max-width: 640px) {
+    .treino-stats-row { grid-template-columns: 1fr; }
+    .treino-ativo-header { flex-direction: column; align-items: flex-start; }
+    .cronometro-box { align-items: flex-start; width: 100%; }
+}
+/* Estados de carregamento/vazio da lista de rotinas em usuario.html */
+.rotinas-carregando, .rotinas-vazio { color: #718096; font-size: 14px; padding: 20px 0; }
+
+/* ==========================================================================
+   HISTÓRICO DE TREINOS (meu-treino.html)
+   ========================================================================== */
+
+.historico-container { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+.historico-container h1 { color: #ffffff; margin-bottom: 0; }
+
+.historico-item { margin-bottom: 8px; background-color: #050A10; border: 1px solid #182A3A; border-radius: 10px; overflow: hidden; }
+
+.historico-item-cabecalho {
+    width: 100%; display: flex; justify-content: space-between; align-items: center;
+    background: transparent; border: none; padding: 16px 20px; text-align: left;
+}
+.historico-item-cabecalho h3 { color: #ffffff; margin-bottom: 4px; }
+.historico-item-data { color: #718096; font-size: 12px; }
+
+.historico-item-resumo { display: flex; gap: 16px; align-items: center; color: #a0aec0; font-size: 13px; }
+.historico-item-resumo strong { color: #25C696; font-size: 15px; }
+
+.historico-item-detalhe { border-top: 1px solid #182A3A; padding: 16px 20px; display: flex; flex-direction: column; gap: 16px; }
+
+.historico-exercicio h4 { color: #ffffff; margin-bottom: 8px; }
+
+.tabela-series-historico { width: 100%; border-collapse: collapse; }
+.tabela-series-historico th {
+    color: #718096; font-size: 11px; text-transform: uppercase; text-align: left;
+    padding: 4px 8px; border-bottom: 1px solid #182A3A;
+}
+.tabela-series-historico td { color: #a0aec0; font-size: 13px; padding: 4px 8px; border-bottom: 1px solid #121212; }
+
+@media (max-width: 640px) {
+    .historico-item-cabecalho { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+
+
+/* Editor de rotina (rotina-editor.html) + botão de remover exercício */
+.exercicio-treino-header { gap: 12px; }
+.exercicio-treino-header .badges-exercicio { margin-left: auto; }
+
+.metas-exercicio { display: flex; gap: 14px; flex-wrap: wrap; }
+.metas-exercicio label { color: #a0aec0; font-size: 12px; font-weight: normal; margin-bottom: 0; }
+.metas-exercicio input { width: 90px; padding: 6px 8px; background-color: #121212; border: 1px solid #182A3A; font-size: 13px; }
+
+.rotina-vazia { color: #718096; font-size: 14px; }
+
+.rotina-erro { color: #e74c3c; font-size: 13px; }
+.rotina-erro:empty { display: none; }

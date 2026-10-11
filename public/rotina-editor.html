@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotina | IF Fitness</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="logoIF.png" type="image/jpg">
+</head>
+
+<body>
+    <header id="cabecalho">
+        <img src="IF Logo.png" class="logo-cabecalho" alt="Logo IF">
+        <nav class="nav-cabecalho">
+            <a href="usuario.html">Início</a>
+            <a href="meu-treino.html">Meu Treino</a>
+            <a href="#">Meu Perfil </a>
+        </nav>
+    </header>
+
+    <main id="conteudo-principal">
+        <div class="treino-layout">
+
+            <!-- ===================== COLUNA PRINCIPAL ===================== -->
+            <section class="treino-coluna-principal">
+
+                <div class="treino-ativo-header">
+                    <div>
+                        <h1 id="titulo-rotina">Nova Rotina</h1>
+                    </div>
+                </div>
+
+                <div class="widget-card">
+                    <div class="campo">
+                        <label for="rotina-nome">Nome da rotina:</label>
+                        <input type="text" id="rotina-nome" placeholder="Ex: Treino A - Peito e Tríceps" maxlength="150">
+                    </div>
+                    <div class="campo">
+                        <label for="rotina-descricao">Descrição (opcional):</label>
+                        <textarea id="rotina-descricao" placeholder="Ex: Foco em hipertrofia, 4x por semana"></textarea>
+                    </div>
+                </div>
+
+                <!-- Cards preenchidos via JS (rotina-editor.js) -->
+                <div class="lista-exercicios-treino" id="lista-exercicios-rotina"></div>
+                <p class="rotina-vazia" id="rotina-vazia">Nenhum exercício ainda. Use a biblioteca ao lado para adicionar.</p>
+
+                <span class="rotina-erro" id="rotina-erro"></span>
+
+                <div class="treino-ativo-acoes">
+                    <button class="btn-fechar-treino" type="button" id="btn-cancelar-rotina">Cancelar</button>
+                    <button class="button" type="button" id="btn-salvar-rotina">Salvar Rotina</button>
+                </div>
+
+            </section>
+
+            <!-- ===================== SIDEBAR: BIBLIOTECA DE EXERCÍCIOS ===================== -->
+            <aside class="treino-sidebar">
+
+                <!-- Estado padrão: só o botão de abrir a biblioteca -->
+                <div class="widget-card" id="widget-adicionar-exercicio">
+                    <h3>Adicionar Exercício</h3>
+                    <p class="sidebar-adicionar-desc">Busque na biblioteca e inclua um novo exercício nesta rotina.</p>
+                    <button class="btn-adicionar-exercicio" type="button" id="btn-abrir-biblioteca">+ Adicionar Exercício</button>
+                </div>
+
+                <!-- Painel da biblioteca, some por padrão -->
+                <div class="widget-card biblioteca-painel" id="biblioteca-painel" hidden style="display: none;">
+                    <div class="biblioteca-header">
+                        <h3>Biblioteca</h3>
+                        <button type="button" class="btn-fechar-biblioteca" id="btn-fechar-biblioteca" aria-label="Fechar biblioteca">✕</button>
+                    </div>
+
+                    <button type="button" class="btn-exercicio-personalizado" id="btn-abrir-personalizado">
+                        + Exercício personalizado
+                    </button>
+
+                    <div class="custom-select" id="select-filtro-musculo">
+                        <button type="button" class="select-btn">
+                            <span class="selected-text">Todos os músculos</span>
+                        </button>
+                        <ul class="select-options">
+                            <li class="option active" data-value="">Todos os músculos</li>
+                            <li class="option" data-value="peito">Peito</li>
+                            <li class="option" data-value="costas">Costas</li>
+                            <li class="option" data-value="trapezio">Trapézio</li>
+                            <li class="option" data-value="dorsais">Dorsais</li>
+                            <li class="option" data-value="lombar">Lombar</li>
+                            <li class="option" data-value="biceps">Bíceps</li>
+                            <li class="option" data-value="triceps">Tríceps</li>
+                            <li class="option" data-value="ombro">Ombro</li>
+                            <li class="option" data-value="antebraco">Antebraço</li>
+                            <li class="option" data-value="quadriceps">Quadríceps</li>
+                            <li class="option" data-value="isquiotibiais">Isquiotibiais</li>
+                            <li class="option" data-value="panturrilha">Panturrilha</li>
+                            <li class="option" data-value="gluteos">Glúteos</li>
+                            <li class="option" data-value="adutores">Adutores</li>
+                        </ul>
+                    </div>
+
+                    <div class="biblioteca-busca">
+                        <span class="biblioteca-busca-icone">🔍</span>
+                        <input type="text" id="input-busca-exercicio" placeholder="Buscar exercício">
+                        <button type="button" class="btn-limpar-busca" id="btn-limpar-busca" aria-label="Limpar busca">✕</button>
+                    </div>
+
+                    <div class="biblioteca-lista" id="biblioteca-lista">
+                        <!-- Preenchido dinamicamente via treino-ativo.js -->
+                    </div>
+                </div>
+
+            </aside>
+
+        </div>
+    </main>
+
+    <footer id="rodape">
+        <p>Para quaisquer dúvidas, relatos de experiências ou sugestões, contate o email: eder.oliveira@escolar.ifrn.edu</p>
+    </footer>
+
+    <!-- ===================== MODAL: EXERCÍCIO PERSONALIZADO ===================== -->
+    <div class="modal-overlay" id="modal-personalizado-overlay" hidden>
+        <div class="modal-personalizado">
+            <div class="modal-header">
+                <h3>Exercício Personalizado</h3>
+                <button type="button" class="btn-fechar-modal" id="btn-fechar-modal" aria-label="Fechar">✕</button>
+            </div>
+
+            <form id="form-exercicio-personalizado">
+                <fieldset>
+                    <div class="campo">
+                        <label for="pers-nome-exercicio">Nome do Exercício:</label>
+                        <input type="text" id="pers-nome-exercicio" placeholder="Ex: Supino Reto">
+                        <span id="pers-nome-erro" class="erro"></span>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <div class="campo">
+                        <label>Agrupamento primário: </label>
+                    </div>
+
+                    <div class="custom-select" id="pers-select-primario">
+                        <button type="button" class="select-btn">
+                            <span class="selected-text">Selecione um agrupamento</span>
+                        </button>
+                        <ul class="select-options">
+                            <li class="option active" data-value="">Selecione um agrupamento</li>
+                            <li class="option" data-value="peito">Peito</li>
+                            <li class="option" data-value="costas">Costas</li>
+                            <li class="option" data-value="trapezio">Trapézio</li>
+                            <li class="option" data-value="dorsais">Dorsais</li>
+                            <li class="option" data-value="lombar">Lombar</li>
+                            <li class="option" data-value="biceps">Bíceps</li>
+                            <li class="option" data-value="triceps">Tríceps</li>
+                            <li class="option" data-value="ombro">Ombro</li>
+                            <li class="option" data-value="antebraco">Antebraço</li>
+                            <li class="option" data-value="quadriceps">Quadríceps</li>
+                            <li class="option" data-value="isquiotibiais">Isquiotibiais</li>
+                            <li class="option" data-value="panturrilha">Panturrilha</li>
+                            <li class="option" data-value="gluteos">Glúteos</li>
+                            <li class="option" data-value="adutores">Adutores</li>
+                        </ul>
+                    </div>
+                    <span id="pers-primario-erro" class="erro"></span>
+                </fieldset>
+
+                <fieldset>
+                    <div class="campo">
+                        <label>Agrupamentos secundários: </label>
+                    </div>
+
+                    <div class="custom-select multi-select" id="pers-select-secundario">
+                        <button type="button" class="select-btn">
+                            <span class="selected-text">Nenhum agrupamento selecionado</span>
+                        </button>
+                        <ul class="select-options">
+                            <li class="option" data-value="peito">Peito</li>
+                            <li class="option" data-value="costas">Costas</li>
+                            <li class="option" data-value="trapezio">Trapézio</li>
+                            <li class="option" data-value="dorsais">Dorsais</li>
+                            <li class="option" data-value="lombar">Lombar</li>
+                            <li class="option" data-value="biceps">Bíceps</li>
+                            <li class="option" data-value="triceps">Tríceps</li>
+                            <li class="option" data-value="ombro">Ombro</li>
+                            <li class="option" data-value="antebraco">Antebraço</li>
+                            <li class="option" data-value="quadriceps">Quadríceps</li>
+                            <li class="option" data-value="isquiotibiais">Isquiotibiais</li>
+                            <li class="option" data-value="panturrilha">Panturrilha</li>
+                            <li class="option" data-value="gluteos">Glúteos</li>
+                            <li class="option" data-value="adutores">Adutores</li>
+                        </ul>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <div class="campo">
+                        <label>Descrição / Comentários:</label>
+                        <textarea id="pers-desc-exercicio"></textarea>
+                    </div>
+                </fieldset>
+
+                <button type="submit" class="btn-salvar-personalizado">Cadastrar Exercício</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="AbrirMenu.js"></script>
+    <script src="biblioteca-exercicios.js"></script>
+    <script src="rotina-editor.js"></script>
+</body>
+
+</html>

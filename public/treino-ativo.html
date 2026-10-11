@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treino em Andamento | IF Fitness</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="logoIF.png" type="image/jpg">
+</head>
+
+<body>
+    <header id="cabecalho">
+        <img src="IF Logo.png" class="logo-cabecalho" alt="Logo IF">
+        <nav class="nav-cabecalho">
+            <a href="usuario.html">Início</a>
+            <a href="meu-treino.html">Meu Treino</a>
+            <a href="#">Meu Perfil </a>
+        </nav>
+    </header>
+
+    <main id="conteudo-principal">
+        <div class="treino-layout">
+
+            <!-- ===================== COLUNA PRINCIPAL ===================== -->
+            <section class="treino-coluna-principal">
+
+                <!-- Cabeçalho do treino: nome + cronômetro -->
+                <div class="treino-ativo-header">
+                    <div>
+                        <h1 id="titulo-treino">Treino Livre</h1>
+                    </div>
+                    <div class="cronometro-box">
+                        <span class="cronometro-label">Duração</span>
+                        <span class="cronometro-tempo" id="cronometro">00:00:00</span>
+                    </div>
+                </div>
+
+                <!-- Estatísticas rápidas -->
+                <div class="treino-stats-row">
+                    <div class="stat-card">
+                        <span class="stat-label">Volume Levantado</span>
+                        <strong class="stat-valor" id="volume-total">0 kg</strong>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Séries Concluídas</span>
+                        <strong class="stat-valor" id="series-concluidas">0/0</strong>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Exercícios</span>
+                        <strong class="stat-valor" id="total-exercicios">0</strong>
+                    </div>
+                </div>
+
+                <!-- Lista de exercícios do treino: preenchida via JS a partir da API
+                     (GET /api/treinos/:id) — não existe mais exemplo hardcoded aqui. -->
+                <div class="lista-exercicios-treino" id="lista-exercicios"></div>
+
+                <!-- Encerrar treino -->
+                <div class="treino-ativo-acoes">
+                    <button class="btn-fechar-treino" type="button" id="btn-descartar-treino">Abandonar</button>
+                    <button class="button" type="button" id="btn-fechar-treino">Registrar Treino</button>
+                </div>
+
+            </section>
+
+            <!-- ===================== SIDEBAR: BIBLIOTECA DE EXERCÍCIOS ===================== -->
+            <aside class="treino-sidebar">
+
+                <!-- Estado padrão: só o botão de abrir a biblioteca -->
+                <div class="widget-card" id="widget-adicionar-exercicio">
+                    <h3>Adicionar Exercício</h3>
+                    <p class="sidebar-adicionar-desc">Busque na biblioteca e inclua um novo exercício neste treino.</p>
+                    <button class="btn-adicionar-exercicio" type="button" id="btn-abrir-biblioteca">+ Adicionar Exercício</button>
+                </div>
+
+                <!-- Painel da biblioteca, some por padrão -->
+                <div class="widget-card biblioteca-painel" id="biblioteca-painel" hidden style="display: none;">
+                    <div class="biblioteca-header">
+                        <h3>Biblioteca</h3>
+                        <button type="button" class="btn-fechar-biblioteca" id="btn-fechar-biblioteca" aria-label="Fechar biblioteca">✕</button>
+                    </div>
+
+                    <button type="button" class="btn-exercicio-personalizado" id="btn-abrir-personalizado">
+                        + Exercício personalizado
+                    </button>
+
+                    <div class="custom-select" id="select-filtro-equipamento">
+                        <button type="button" class="select-btn">
+                            <span class="selected-text">Todos os equipamentos</span>
+                        </button>
+                        <ul class="select-options">
+                            <li class="option active" data-value="">Todos os equipamentos</li>
+                            <li class="option" data-value="barra">Barra</li>
+                            <li class="option" data-value="halteres">Halteres</li>
+                            <li class="option" data-value="maquina">Máquina</li>
+                            <li class="option" data-value="polia">Polia</li>
+                            <li class="option" data-value="kettlebell">Kettlebell</li>
+                            <li class="option" data-value="peso-corporal">Peso Corporal</li>
+                        </ul>
+                    </div>
+
+                    <div class="custom-select" id="select-filtro-musculo">
+                        <button type="button" class="select-btn">
+                            <span class="selected-text">Todos os músculos</span>
+                        </button>
+                        <ul class="select-options">
+                            <li class="option active" data-value="">Todos os músculos</li>
+                        </ul>
+                    </div>
+
+                    <div class="biblioteca-busca">
+                        <span class="biblioteca-busca-icone">🔍</span>
+                        <input type="text" id="input-busca-exercicio" placeholder="Buscar exercício">
+                        <button type="button" class="btn-limpar-busca" id="btn-limpar-busca" aria-label="Limpar busca">✕</button>
+                    </div>
+
+                    <div class="biblioteca-lista" id="biblioteca-lista">
+                        <!-- Preenchido dinamicamente via treino-ativo.js -->
+                    </div>
+                </div>
+
+            </aside>
+
+        </div>
+    </main>
+
+    <footer id="rodape">
+        <p>Para quaisquer dúvidas, relatos de experiências ou sugestões, contate o email: eder.oliveira@escolar.ifrn.edu</p>
+    </footer>
+
+    <!-- ===================== MODAL: EXERCÍCIO PERSONALIZADO ===================== -->
+    <div class="modal-overlay" id="modal-personalizado-overlay" hidden>
+        <div class="modal-personalizado">
+            <div class="modal-header">
+                <h3>Exercício Personalizado</h3>
+                <button type="button" class="btn-fechar-modal" id="btn-fechar-modal" aria-label="Fechar">✕</button>
+            </div>
+
+            <form id="form-exercicio-personalizado">
+                <fieldset>
+                    <div class="campo">
+                        <label for="pers-nome-exercicio">Nome do Exercício:</label>
+                        <input type="text" id="pers-nome-exercicio" placeholder="Ex: Supino Reto">
+                        <span id="pers-nome-erro" class="erro"></span>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <div class="campo">
+                        <label>Agrupamento primário: </label>
+                    </div>
+
+                    <div class="custom-select" id="pers-select-primario">
+                        <button type="button" class="select-btn">
+                            <span class="selected-text">Selecione um agrupamento</span>
+                        </button>
+                        <ul class="select-options">
+                            <li class="option active" data-value="">Selecione um agrupamento</li>
+                        </ul>
+                    </div>
+                    <span id="pers-primario-erro" class="erro"></span>
+                </fieldset>
+
+                <fieldset>
+                    <div class="campo">
+                        <label>Agrupamentos secundários: </label>
+                    </div>
+
+                    <div class="custom-select multi-select" id="pers-select-secundario">
+                        <button type="button" class="select-btn">
+                            <span class="selected-text">Nenhum agrupamento selecionado</span>
+                        </button>
+                        <ul class="select-options">
+                        </ul>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <div class="campo">
+                        <label>Descrição / Comentários:</label>
+                        <textarea id="pers-desc-exercicio"></textarea>
+                    </div>
+                </fieldset>
+
+                <button type="submit" class="btn-salvar-personalizado">Cadastrar Exercício</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="AbrirMenu.js"></script>
+    <script src="biblioteca-exercicios.js"></script>
+    <script src="treino-ativo.js"></script>
+</body>
+
+</html>
