@@ -33,10 +33,12 @@ app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    proxy: true, // IMPORTANTE: Informa ao Express que está atrás de um proxy reverso (como o Render)
     cookie: {
         maxAge: 1000 * 60 * 60 * 8, // 8 horas
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production' // Ativa automaticamente se estiver no Render}
+        secure: process.env.NODE_ENV === 'production', // Ativa 'secure' automaticamente no Render (HTTPS)
+        sameSite: 'lax' // Permite que o cookie seja enviado corretamente nas navegações padrão
     }
 }));
 
