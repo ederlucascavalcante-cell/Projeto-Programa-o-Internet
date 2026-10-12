@@ -589,3 +589,63 @@ button:hover { background: #16a084e5; }
 
 .rotina-erro { color: #e74c3c; font-size: 13px; }
 .rotina-erro:empty { display: none; }
+
+/* ==========================================================================
+   PERFIL (perfil.html)
+   Reaproveita: .dash-container, .feed-principal, .sidebar-fixa, .card-hero,
+   .widget-card, .widget-title, .progress-info, .barra-progresso-*, .dia-item,
+   .dias-semana-grid, .btn-novo, .btn-atalho, .modal-*, .campo, .erro
+   ========================================================================== */
+ 
+.perfil-hero { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+.perfil-identidade { display: flex; align-items: center; gap: 18px; }
+.perfil-avatar {
+    width: 72px; height: 72px; flex-shrink: 0; border-radius: 50%; background: #121212;
+    border: 2px solid #25C696; color: #25C696; font-size: 30px; font-weight: bold;
+    display: flex; align-items: center; justify-content: center;
+}
+.perfil-btn-editar { margin-top: 12px; padding: 6px 14px; font-size: 13px; }
+.perfil-metrica { text-align: right; }
+.perfil-metrica strong { display: block; color: #25C696; font-size: 34px; line-height: 1; }
+.perfil-metrica span { color: #a0aec0; font-size: 13px; }
+ 
+/* Título do card + controles (botões) na mesma linha, centralizados entre si */
+.widget-title.com-controles { margin-bottom: 12px; gap: 10px; }
+.widget-title.com-controles h3 { margin-bottom: 0; }
+ 
+.form-peso { display: flex; gap: 10px; margin: 0 0 4px; }
+.form-peso input { margin: 0; flex: 1; }
+.form-peso button { white-space: nowrap; }
+ 
+.seletor-opcoes { display: flex; gap: 6px; }
+.seletor-opcoes button { background: #121212; border: 1px solid #182A3A; color: #a0aec0; font-size: 12px; padding: 6px 12px; }
+.seletor-opcoes button:hover { background: #182A3A; color: #ffffff; }
+.seletor-opcoes button.ativo { background: rgba(37, 198, 150, 0.15); border-color: #25C696; color: #25C696; }
+ 
+.volume-regra { margin-bottom: 12px; }
+.volume-linha { margin-bottom: 12px; }
+.volume-linha .progress-info { margin-bottom: 4px; }
+.volume-linha .progress-info strong { color: #ffffff; }
+ 
+.calendario-nav { padding: 4px 12px; text-align: center; }
+.calendario-nav:disabled { opacity: 0.4; cursor: default; }
+.calendario-nav:disabled:hover { background-color: #121212; }
+#calendario-titulo { text-transform: capitalize; font-size: 14px; }
+.calendario-rotulos { margin-top: 0; }
+.calendario-rotulos span { color: #718096; font-size: 11px; }
+#calendario-grid .dia-item span { font-size: 13px; }
+button.dia-item { font-weight: normal; }
+button.dia-item:hover { background-color: rgba(37, 198, 150, 0.25); }
+.calendario-detalhe { margin-top: 14px; border-top: 1px solid #182A3A; padding-top: 12px; color: #a0aec0; font-size: 13px; }
+.calendario-detalhe strong { color: #ffffff; }
+.calendario-detalhe ul { margin: 6px 0 0 18px; }
+ 
+/* O .dash-container (usuario.html e perfil.html) não tinha versão mobile */
+@media (max-width: 900px) {
+    .dash-container { grid-template-columns: 1fr; }
+    .sidebar-fixa { position: static; }
+}
+@media (max-width: 640px) {
+    .perfil-metrica { text-align: left; }
+    .form-peso { flex-direction: column; }
+}

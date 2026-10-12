@@ -27,7 +27,6 @@ router.post('/', async (req, res) => {
                 'SELECT id FROM rotinas WHERE id = ? AND usuario_id = ?', [rotina_id, req.session.usuarioId]
             );
             if (rotina.length === 0) {
-                conexao.release();
                 return res.status(404).json({ erro: 'Rotina não encontrada.' });
             }
             [exerciciosDaRotina] = await conexao.query(
@@ -131,7 +130,6 @@ router.put('/:id', async (req, res) => {
             [req.params.id, req.session.usuarioId]
         );
         if (treinos.length === 0) {
-            conexao.release();
             return res.status(404).json({ erro: 'Treino não encontrado.' });
         }
 
@@ -176,8 +174,8 @@ router.put('/:id', async (req, res) => {
         await conexao.commit();
         res.json({ id: Number(req.params.id), volume_total_kg: volumeTotal });
     } catch (erro) {
-        await conexao.rollback();
         console.error(erro);
+        await conexao.rollback().catch(() => {});
         res.status(500).json({ erro: 'Erro ao finalizar treino.' });
     } finally {
         conexao.release();

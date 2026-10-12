@@ -19,7 +19,14 @@ const pool = mysql.createPool({
     charset: 'utf8mb4',
     waitForConnections: true,
     connectionLimit: 10,
-    dateStrings: true // evita fuso-horário implícito do driver mexendo em DATETIME/DATE
+    dateStrings: true,
+    // Manda pacotes keep-alive na conexão TCP; sem isso, uma conexão ociosa pode ser
+    // derrubada por baixo (suspensão do PC, reinício do MySQL, rede) e o pool só
+    // descobre isso quando entrega a conexão morta pra uma rota (ECONNRESET).
+    enableKeepAlive: true,
+    keepAliveInitialDelay: 10000,
+    maxIdle: 5,
+    idleTimeout: 30000
 });
 
 module.exports = pool;

@@ -77,7 +77,6 @@ router.post('/', exigirLogin, async (req, res) => {
             'SELECT id FROM grupos_musculares WHERE chave = ?', [grupo_primario_chave]
         );
         if (grupoPrimario.length === 0) {
-            conexao.release();
             return res.status(400).json({ erro: 'Agrupamento primário inválido.' });
         }
 
@@ -107,8 +106,8 @@ router.post('/', exigirLogin, async (req, res) => {
         await conexao.commit();
         res.status(201).json({ id: exercicioId });
     } catch (erro) {
-        await conexao.rollback();
         console.error(erro);
+        await conexao.rollback().catch(() => {});
         res.status(500).json({ erro: 'Erro ao cadastrar exercício.' });
     } finally {
         conexao.release();

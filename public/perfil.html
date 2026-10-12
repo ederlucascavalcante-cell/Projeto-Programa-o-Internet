@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil | IF Fitness</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="logoIF.png" type="image/jpg">
+</head>
+
+<body>
+    <header id="cabecalho">
+        <img src="IF Logo.png" class="logo-cabecalho" alt="Logo IF">
+        <nav class="nav-cabecalho">
+            <a href="usuario.html">Início</a>
+            <a href="meu-treino.html">Meu Treino</a>
+            <a href="perfil.html">Meu Perfil </a>
+            <a href="#" id="link-sair">Sair</a>
+        </nav>
+    </header>
+
+    <main id="conteudo-principal">
+        <div class="dash-container">
+
+            <section class="feed-principal">
+
+                <!-- Hero / Banner de perfil -->
+                <div class="card-hero perfil-hero">
+                    <div class="perfil-identidade">
+                        <div class="perfil-avatar" id="perfil-avatar">?</div>
+                        <div>
+                            <h1 id="perfil-nome">...</h1>
+                            <p id="perfil-email"></p>
+                            <button type="button" class="btn-novo perfil-btn-editar" id="btn-editar-perfil">Editar Perfil</button>
+                        </div>
+                    </div>
+                    <div class="perfil-metrica">
+                        <strong id="perfil-total-treinos">0</strong>
+                        <span>treinos realizados</span>
+                    </div>
+                </div>
+
+                <!-- Peso corporal: valor atual, registro e histórico -->
+                <div class="widget-card">
+                    <div class="widget-title com-controles">
+                        <h3>Peso corporal</h3>
+                        <span class="valor-frequencia" id="peso-atual">—</span>
+                    </div>
+                    <form id="form-peso" class="form-peso">
+                        <input type="number" id="input-peso" step="0.1" min="20" max="500" placeholder="Ex: 78,5 (kg)">
+                        <button type="submit">Registrar peso de hoje</button>
+                    </form>
+                    <span id="peso-erro" class="erro"></span>
+                    <div id="grafico-peso"><p class="rotinas-carregando">Carregando...</p></div>
+                </div>
+
+                <!-- Estatísticas por semana -->
+                <div class="widget-card">
+                    <div class="widget-title com-controles">
+                        <h3>Últimas 8 semanas</h3>
+                        <div class="seletor-opcoes" id="seletor-metrica">
+                            <button type="button" class="ativo" data-valor="volume">Volume</button>
+                            <button type="button" data-valor="duracao">Duração</button>
+                        </div>
+                    </div>
+                    <span class="meta-subtext">Cada barra é uma semana, identificada pela segunda-feira.</span>
+                    <div id="grafico-semanal"><p class="rotinas-carregando">Carregando...</p></div>
+                </div>
+
+                <!-- Volume músculo-série -->
+                <div class="widget-card">
+                    <div class="widget-title com-controles">
+                        <h3>Volume por agrupamento</h3>
+                        <div class="seletor-opcoes" id="seletor-periodo">
+                            <button type="button" class="ativo" data-valor="semana">Semana</button>
+                            <button type="button" data-valor="mes">Mês</button>
+                            <button type="button" data-valor="ano">Ano</button>
+                        </div>
+                    </div>
+                    <span class="meta-subtext volume-regra">Séries concluídas: agrupamento primário vale 1 série, secundário vale 0,5.</span>
+                    <div id="lista-volume-muscular"><p class="rotinas-carregando">Carregando...</p></div>
+                </div>
+
+            </section>
+
+            <aside class="sidebar-fixa">
+                <!-- Calendário mensal -->
+                <div class="widget-card">
+                    <div class="widget-title com-controles">
+                        <button type="button" class="btn-atalho calendario-nav" id="btn-mes-anterior" aria-label="Mês anterior">‹</button>
+                        <h3 id="calendario-titulo"></h3>
+                        <button type="button" class="btn-atalho calendario-nav" id="btn-mes-seguinte" aria-label="Próximo mês">›</button>
+                    </div>
+                    <div class="dias-semana-grid calendario-rotulos">
+                        <span>D</span><span>S</span><span>T</span><span>Q</span><span>Q</span><span>S</span><span>S</span>
+                    </div>
+                    <div class="dias-semana-grid" id="calendario-grid"></div>
+                    <div id="calendario-detalhe" class="calendario-detalhe" hidden></div>
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+    <footer id="rodape">
+        <p>Para quaisquer dúvidas, relatos de experiências ou sugestões, contate o email: eder.oliveira@escolar.ifrn.edu</p>
+    </footer>
+
+    <!-- ===================== MODAL: EDITAR PERFIL ===================== -->
+    <div class="modal-overlay" id="modal-perfil-overlay" hidden>
+        <div class="modal-personalizado">
+            <div class="modal-header">
+                <h3>Editar Perfil</h3>
+                <button type="button" class="btn-fechar-modal" id="btn-fechar-modal-perfil" aria-label="Fechar">✕</button>
+            </div>
+
+            <form id="form-perfil">
+                <fieldset>
+                    <div class="campo">
+                        <label for="perfil-input-nome">Nome:</label>
+                        <input type="text" id="perfil-input-nome" placeholder="Seu nome">
+                    </div>
+                    <div class="campo">
+                        <label for="perfil-input-email">Email:</label>
+                        <input type="text" id="perfil-input-email" placeholder="voce@exemplo.com">
+                    </div>
+                    <span id="perfil-erro" class="erro"></span>
+                </fieldset>
+
+                <button type="submit" class="btn-salvar-personalizado">Salvar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="sessao.js"></script>
+    <script src="perfil-graficos.js"></script>
+    <script src="perfil.js"></script>
+</body>
+
+</html>
