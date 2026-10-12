@@ -16,6 +16,8 @@ const authRoutes = require('./src/routes/auth.routes');
 const rotinasRoutes = require('./src/routes/rotinas.routes');
 const exerciciosRoutes = require('./src/routes/exercicios.routes');
 const treinosRoutes = require('./src/routes/treinos.routes');
+const perfilRoutes = require('./src/routes/perfil.routes');
+const estatisticasRoutes = require('./src/routes/estatisticas.routes');
 
 const app = express();
 
@@ -46,6 +48,8 @@ app.use('/api/auth', authRoutes);
 app.use('/api/rotinas', rotinasRoutes);
 app.use('/api/exercicios', exerciciosRoutes);
 app.use('/api/treinos', treinosRoutes);
+app.use('/api/perfil', perfilRoutes);
+app.use('/api/estatisticas', estatisticasRoutes);
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/inicio.html');

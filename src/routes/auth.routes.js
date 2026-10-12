@@ -2,6 +2,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const pool = require('../db');
+const { emailValido } = require('../validacao');
 
 const router = express.Router();
 const SALT_ROUNDS = 10;
@@ -15,10 +16,6 @@ function senhaValida(senha) {
     return typeof senha === 'string'
         && senha.trim().length >= 8
         && /(?=.*[a-zA-Z])(?=.*[0-9])/.test(senha.trim());
-}
-
-function emailValido(email) {
-    return typeof email === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 }
 
 // POST /api/auth/cadastro

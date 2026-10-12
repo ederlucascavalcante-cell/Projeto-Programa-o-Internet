@@ -88,8 +88,8 @@ router.post('/', async (req, res) => {
         await conexao.commit();
         res.status(201).json({ id: rotinaId });
     } catch (erro) {
-        await conexao.rollback();
         console.error(erro);
+        await conexao.rollback().catch(() => {});
         res.status(500).json({ erro: 'Erro ao criar rotina.' });
     } finally {
         conexao.release();
@@ -114,7 +114,6 @@ router.put('/:id', async (req, res) => {
             [req.params.id, req.session.usuarioId]
         );
         if (rotinas.length === 0) {
-            conexao.release();
             return res.status(404).json({ erro: 'Rotina não encontrada.' });
         }
 
@@ -133,8 +132,8 @@ router.put('/:id', async (req, res) => {
         await conexao.commit();
         res.json({ id: Number(req.params.id) });
     } catch (erro) {
-        await conexao.rollback();
         console.error(erro);
+        await conexao.rollback().catch(() => {});
         res.status(500).json({ erro: 'Erro ao atualizar rotina.' });
     } finally {
         conexao.release();
